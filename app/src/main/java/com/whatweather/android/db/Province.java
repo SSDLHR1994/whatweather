@@ -1,15 +1,14 @@
 package com.whatweather.android.db;
 
-import org.litepal.crud.LitePalSupport;
+import org.litepal.crud.DataSupport;
+
 
 /**
  * Created by Administrator on 2018/12/2.
  */
 
-public class Province extends LitePalSupport {
+public class Province extends DataSupport {
     private  int id ;
-
-
     private String provinceName;
     private  int provinceCode;
 

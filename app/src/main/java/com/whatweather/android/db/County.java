@@ -1,14 +1,15 @@
 package com.whatweather.android.db;
 
-import org.litepal.crud.LitePalSupport;
+import org.litepal.crud.DataSupport;
+
 
 /**
  * Created by Administrator on 2018/12/2.
  */
 
-public class Country extends LitePalSupport {
+public class County extends DataSupport {
     private int id;
-    private  String  countryName;
+    private  String  countyName;
 //    县的名字
     private  String weatherId;
 //    县所对应的天气的ID
@@ -23,12 +24,12 @@ public class Country extends LitePalSupport {
         this.id = id;
     }
 
-    public String getCountryName() {
-        return countryName;
+    public String getCountyName() {
+        return countyName;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setCountyName(String countryName) {
+        this.countyName = countryName;
     }
 
     public String getWeatherId() {
