@@ -1,6 +1,7 @@
 package com.whatweather.android.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.whatweather.android.R;
+import com.whatweather.android.WeatherActivity;
 import com.whatweather.android.db.City;
 import com.whatweather.android.db.County;
 import com.whatweather.android.db.Province;
@@ -92,6 +94,13 @@ public class ChooseAreaFragment extends Fragment {
 
                     selectedCity = cityList.get(position);
                     queryCounties();
+                }else if (currentLevel == LEVEL_COUNTY){
+                    String weatherId=countyList.get(position).getWeatherId();
+                    Intent intent=new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
+
                 }
 
 
@@ -109,7 +118,7 @@ public class ChooseAreaFragment extends Fragment {
         });
 
 
-//        queryProvinces();
+        queryProvinces();
 
 
     }
@@ -138,7 +147,7 @@ public class ChooseAreaFragment extends Fragment {
     private void queryCities() {
         tittleText.setText(selectedProvince.getProvinceName());
         backButton.setVisibility(View.VISIBLE);
-        cityList = DataSupport.where("provinceid=?", String.valueOf(selectedProvince.getId())).find(City.class);
+        cityList = DataSupport.where("provinceid = ?", String.valueOf(selectedProvince.getId())).find(City.class);
         if (cityList.size() > 0) {
 
             dataList.clear();
@@ -162,7 +171,7 @@ public class ChooseAreaFragment extends Fragment {
     private void queryCounties() {
         tittleText.setText(selectedCity.getCityName());
         backButton.setVisibility(View.VISIBLE);
-        countyList = DataSupport.where("cityid=?", String.valueOf(selectedCity.getId())).find(County.class);
+        countyList = DataSupport.where("cityid = ?",String.valueOf(selectedCity.getId())).find(County.class);
         if (countyList.size() > 0) {
             dataList.clear();
             for (County county : countyList) {
